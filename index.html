@@ -70,6 +70,7 @@
           <a href="#bounds" class="mdl-layout__tab">Bounds</a>
           <a href="#colores" class="mdl-layout__tab">Colores</a>
           <a href="#iconos" class="mdl-layout__tab">Iconos</a>
+          <a href="#streetview" class="mdl-layout__tab">Streetview</a>
 
         </div>
       </header>
@@ -434,6 +435,94 @@
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="contenedor_mapa">
               <div class="map" id="map_iconos"></div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Colores</h4>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <pre>
+                    &lt;script type="text/javascript"&gt;
+
+                    var locations7 = [
+                     ['Bondi Beach', -33.890542, 151.274856, 4],
+                     ['Coogee Beach', -33.923036, 151.259052, 5],
+                     ['Cronulla Beach', -34.028249, 151.157507, 3],
+                     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                     ['Maroubra Beach', -33.950198, 151.259302, 1]
+                   ];
+                   var origin7 = new google.maps.LatLng(locations7[0][1], locations7[0][2]);
+                   var styles7 = [{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#002a50"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#002a50"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#0086ff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#d9d9d9"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#363636"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#acacac"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"on"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#f60404"},{"visibility":"off"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#002a50"}]}];
+                   var image = {
+                     url: 'images/pin.svg'
+                       };
+                     var map7 = new google.maps.Map(document.getElementById('map_iconos'), {
+                       zoom: 5,
+                       center: origin7,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP,
+                       styles: styles7
+                     });
+
+                     var latlngbounds7 = new google.maps.LatLngBounds();
+
+                     var infowindow7 = new google.maps.InfoWindow();
+
+                     var marker7, i;
+
+                     for (i = 0; i < locations7.length; i++) {
+                       var position7 = new google.maps.LatLng(locations7[i][1], locations7[i][2]);
+                       marker7 = new google.maps.Marker({
+                         position: position7,
+                         map: map7,
+                         icon: image
+                       });
+
+                       latlngbounds7.extend(position7);
+
+
+                       google.maps.event.addListener(marker7, 'click', (function(marker7, i) {
+                         return function() {
+                           infowindow7.setContent(locations7[i][0]);
+                           infowindow7.open(map7, marker7);
+                         }
+                       })(marker7, i));
+                     }
+
+                     map7.fitBounds(latlngbounds7);
+
+                    &lt;/script&gt;
+
+                    &lt;script async defer
+                      src="https://maps.googleapis.com/maps/api/js?key=CUSTOM_MAP_API&callback=initMap"&gt;
+                    &lt;/script&gt;
+                  </pre>
+                </div>
+              </div>
+              <div class="mdl-border-top">
+                <pre>
+                  var customImage = {
+                    url: 'images/pin.svg'
+                      };
+
+                      new google.maps.Marker({
+                        icon: customImage
+                      });
+                </pre>
+              </div>
+              <div class="mdl-card__actions">
+                <button type="button" name="button" class="mdl-button"> <a href="https://snazzymaps.com" target="_blank">https://snazzymaps.com</a></button>
+              </div>
+              <div class="mdl-card__actions hidden">
+                <button class="mdl-button">Copiar Código</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="streetview">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="contenedor_mapa">
+              <div class="map" id="map_streetview"></div>
             </div>
           </section>
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
