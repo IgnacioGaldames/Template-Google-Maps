@@ -321,6 +321,21 @@
                   </pre>
                 </div>
               </div>
+              <div class="mdl-border-top">
+                <pre>
+                  var customLatlngbounds = new google.maps.LatLngBounds();
+
+                  for (i = 0; i < myPosition.length; i++) {
+                    marker5 = new google.maps.Marker({
+                      position: myPosition,
+                    });
+
+                    customLatlngbounds.extend(myPosition);
+                  }
+
+
+                </pre>
+              </div>
               <div class="mdl-card__actions hidden">
                 <button class="mdl-button">Copiar Código</button>
               </div>
@@ -394,6 +409,16 @@
                     &lt;/script&gt;
                   </pre>
                 </div>
+              </div>
+              <div class="mdl-border-top">
+                <pre>
+                  var customStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
+
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    styles: customStyles
+
+                  });
+                </pre>
               </div>
               <div class="mdl-card__actions">
                 <button type="button" name="button" class="mdl-button"> <a href="https://snazzymaps.com" target="_blank">https://snazzymaps.com</a></button>
@@ -471,6 +496,17 @@
                     &lt;/script&gt;
                   </pre>
                 </div>
+              </div>
+              <div class="mdl-border-top">
+                <pre>
+                  var customImage = {
+                    url: 'images/pin.svg'
+                      };
+
+                      new google.maps.Marker({
+                        icon: customImage
+                      });
+                </pre>
               </div>
               <div class="mdl-card__actions">
                 <button type="button" name="button" class="mdl-button"> <a href="https://snazzymaps.com" target="_blank">https://snazzymaps.com</a></button>

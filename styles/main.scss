@@ -97,7 +97,10 @@ html, body {
   color: inherit;
   background-color: transparent;
 }
-.mdl-demo .mdl-card__supporting-text + .mdl-card__actions {
+.mdl-demo .mdl-card__supporting-text + .mdl-card__actions, .mdl-border-top + .mdl-card__actions {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.mdl-border-top {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 .mdl-demo #add {
