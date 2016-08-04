@@ -65,8 +65,10 @@
           <a href="#basico" class="mdl-layout__tab is-active">Básico</a>
           <a href="#marcador" class="mdl-layout__tab">Marcador</a>
           <a href="#infoview" class="mdl-layout__tab">InfoView</a>
-          <a href="#features" class="mdl-layout__tab">Technology</a>
-          <a href="#features" class="mdl-layout__tab">FAQ</a>
+          <a href="#multiples" class="mdl-layout__tab">Multiples Marcadores</a>
+          <a href="#bounds" class="mdl-layout__tab">Bounds</a>
+          <a href="#colores" class="mdl-layout__tab">Colores</a>
+          <a href="#iconos" class="mdl-layout__tab">Iconos</a>
 
         </div>
       </header>
@@ -144,7 +146,7 @@
             </div>
           </section>
         </div>
-        <div class="mdl-layout__tab-panel is-active" id="infoview">
+        <div class="mdl-layout__tab-panel" id="infoview">
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="contenedor_mapa">
               <div class="map" id="map_infoview"></div>
@@ -158,8 +160,26 @@
                   <pre>
                     &lt;script type="text/javascript"&gt;
 
+                    var uluru = {lat: -25.363, lng: 131.044};
+                    var map3 = new google.maps.Map(document.getElementById('map_infoview'), {
+                      zoom: 4,
+                      center: uluru
+                    });
 
+                    var contentString3 = 'contenido';
 
+                    var infowindow3 = new google.maps.InfoWindow({
+                      content: contentString3
+                    });
+
+                    var marker3 = new google.maps.Marker({
+                      position: uluru,
+                      map: map3,
+                      title: 'Uluru (Ayers Rock)'
+                    });
+                    marker3.addListener('click', function() {
+                      infowindow3.open(map3, marker3);
+                    });
 
                     &lt;/script&gt;
 
@@ -175,7 +195,7 @@
             </div>
           </section>
         </div>
-        <div class="mdl-layout__tab-panel is-active" id="multiples">
+        <div class="mdl-layout__tab-panel" id="multiples">
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="contenedor_mapa">
               <div class="map" id="map_multiple"></div>
@@ -188,13 +208,40 @@
                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                   <pre>
                     &lt;script type="text/javascript"&gt;
-                      var map;
-                      function initMap() {
-                        map = new google.maps.Map(document.getElementById('map'), {
-                          center: {lat: -34.397, lng: 150.644},
-                          zoom: 8
-                        });
-                      }
+                    var locations4 = [
+                   ['Bondi Beach', -33.890542, 151.274856, 4],
+                   ['Coogee Beach', -33.923036, 151.259052, 5],
+                   ['Cronulla Beach', -34.028249, 151.157507, 3],
+                   ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                   ['Maroubra Beach', -33.950198, 151.259302, 1]
+                 ];
+                 var origin4 = new google.maps.LatLng(locations4[0][1], locations4[0][2]);
+
+                 var map4 = new google.maps.Map(document.getElementById('map_multiple'), {
+                   zoom: 10,
+                   center: origin4,
+                   mapTypeId: google.maps.MapTypeId.ROADMAP
+                 });
+
+                 var infowindow4 = new google.maps.InfoWindow();
+
+                 var marker4, i;
+
+                 for (i = 0; i < locations4.length; i++) {
+                   var position4 = new google.maps.LatLng(locations4[i][1], locations4[i][2]);
+
+                   marker4 = new google.maps.Marker({
+                     position: position4,
+                     map: map4
+                   });
+
+                   google.maps.event.addListener(marker4, 'click', (function(marker4, i) {
+                     return function() {
+                       infowindow4.setContent(locations4[i][0]);
+                       infowindow4.open(map4, marker4);
+                     }
+                   })(marker4, i));
+                 }
                     &lt;/script&gt;
 
                     &lt;script async defer
@@ -202,6 +249,231 @@
                     &lt;/script&gt;
                   </pre>
                 </div>
+              </div>
+              <div class="mdl-card__actions hidden">
+                <button class="mdl-button">Copiar Código</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="bounds">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="contenedor_mapa">
+              <div class="map" id="map_bounds"></div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Multiples Marcadores Centrados</h4>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <pre>
+                    &lt;script type="text/javascript"&gt;
+
+                    var locations5 = [
+                      ['X', -36.890542, 153.274856, 6],
+                     ['Bondi Beach', -33.890542, 151.274856, 4],
+                     ['Coogee Beach', -33.923036, 151.259052, 5],
+                     ['Cronulla Beach', -34.028249, 151.157507, 3],
+                     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                     ['Maroubra Beach', -33.950198, 151.259302, 1]
+                   ];
+                   var origin5 = new google.maps.LatLng(locations5[0][1], locations5[0][2]);
+
+                     var map5 = new google.maps.Map(document.getElementById('map_bounds'), {
+                       zoom: 5,
+                       center: origin5,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP
+                     });
+
+                     var latlngbounds5 = new google.maps.LatLngBounds();
+
+                     var infowindow5 = new google.maps.InfoWindow();
+
+                     var marker5, i;
+
+                     for (i = 0; i < locations5.length; i++) {
+                       var position5 = new google.maps.LatLng(locations5[i][1], locations5[i][2]);
+                       marker5 = new google.maps.Marker({
+                         position: position5,
+                         map: map5,
+
+                       });
+
+                       latlngbounds5.extend(position5);
+
+
+                       google.maps.event.addListener(marker5, 'click', (function(marker5, i) {
+                         return function() {
+                           infowindow5.setContent(locations5[i][0]);
+                           infowindow5.open(map5, marker5);
+                         }
+                       })(marker5, i));
+                     }
+
+                     map5.fitBounds(latlngbounds);
+
+                    &lt;/script&gt;
+
+                    &lt;script async defer
+                      src="https://maps.googleapis.com/maps/api/js?key=CUSTOM_MAP_API&callback=initMap"&gt;
+                    &lt;/script&gt;
+                  </pre>
+                </div>
+              </div>
+              <div class="mdl-card__actions hidden">
+                <button class="mdl-button">Copiar Código</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="colores">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="contenedor_mapa">
+              <div class="map" id="map_colores"></div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Colores</h4>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <pre>
+                    &lt;script type="text/javascript"&gt;
+
+                    var locations6 = [
+                      ['X', -30.890542, 156.274856, 6],
+                     ['Bondi Beach', -33.890542, 151.274856, 4],
+                     ['Coogee Beach', -33.923036, 151.259052, 5],
+                     ['Cronulla Beach', -34.028249, 151.157507, 3],
+                     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                     ['Maroubra Beach', -33.950198, 151.259302, 1]
+                   ];
+                   var origin6 = new google.maps.LatLng(locations6[0][1], locations6[0][2]);
+                   var styles6 = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
+
+                     var map6 = new google.maps.Map(document.getElementById('map_colores'), {
+                       zoom: 5,
+                       center: origin6,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP,
+                       styles: styles6
+
+                     });
+
+                     var latlngbounds6 = new google.maps.LatLngBounds();
+
+                     var infowindow6 = new google.maps.InfoWindow();
+
+                     var marker6, i;
+
+                     for (i = 0; i < locations6.length; i++) {
+                       var position6 = new google.maps.LatLng(locations6[i][1], locations6[i][2]);
+                       marker6 = new google.maps.Marker({
+                         position: position6,
+                         map: map6,
+
+                       });
+
+                       latlngbounds6.extend(position6);
+
+
+                       google.maps.event.addListener(marker6, 'click', (function(marker6, i) {
+                         return function() {
+                           infowindow6.setContent(locations6[i][0]);
+                           infowindow6.open(map6, marker6);
+                         }
+                       })(marker6, i));
+                     }
+
+                     map6.fitBounds(latlngbounds6);
+
+                    &lt;/script&gt;
+
+                    &lt;script async defer
+                      src="https://maps.googleapis.com/maps/api/js?key=CUSTOM_MAP_API&callback=initMap"&gt;
+                    &lt;/script&gt;
+                  </pre>
+                </div>
+              </div>
+              <div class="mdl-card__actions">
+                <button type="button" name="button" class="mdl-button"> <a href="https://snazzymaps.com" target="_blank">https://snazzymaps.com</a></button>
+              </div>
+              <div class="mdl-card__actions hidden">
+                <button class="mdl-button">Copiar Código</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel" id="iconos">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="contenedor_mapa">
+              <div class="map" id="map_iconos"></div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Colores</h4>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <pre>
+                    &lt;script type="text/javascript"&gt;
+
+                    var locations7 = [
+                     ['Bondi Beach', -33.890542, 151.274856, 4],
+                     ['Coogee Beach', -33.923036, 151.259052, 5],
+                     ['Cronulla Beach', -34.028249, 151.157507, 3],
+                     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                     ['Maroubra Beach', -33.950198, 151.259302, 1]
+                   ];
+                   var origin7 = new google.maps.LatLng(locations7[0][1], locations7[0][2]);
+                   var styles7 = [{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#002a50"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#002a50"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#0086ff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#d9d9d9"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#363636"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#acacac"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"on"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#f60404"},{"visibility":"off"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#002a50"}]}];
+                   var image = {
+                     url: 'images/pin.svg'
+                       };
+                     var map7 = new google.maps.Map(document.getElementById('map_iconos'), {
+                       zoom: 5,
+                       center: origin7,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP,
+                       styles: styles7
+                     });
+
+                     var latlngbounds7 = new google.maps.LatLngBounds();
+
+                     var infowindow7 = new google.maps.InfoWindow();
+
+                     var marker7, i;
+
+                     for (i = 0; i < locations7.length; i++) {
+                       var position7 = new google.maps.LatLng(locations7[i][1], locations7[i][2]);
+                       marker7 = new google.maps.Marker({
+                         position: position7,
+                         map: map7,
+                         icon: image
+                       });
+
+                       latlngbounds7.extend(position7);
+
+
+                       google.maps.event.addListener(marker7, 'click', (function(marker7, i) {
+                         return function() {
+                           infowindow7.setContent(locations7[i][0]);
+                           infowindow7.open(map7, marker7);
+                         }
+                       })(marker7, i));
+                     }
+
+                     map7.fitBounds(latlngbounds7);
+
+                    &lt;/script&gt;
+
+                    &lt;script async defer
+                      src="https://maps.googleapis.com/maps/api/js?key=CUSTOM_MAP_API&callback=initMap"&gt;
+                    &lt;/script&gt;
+                  </pre>
+                </div>
+              </div>
+              <div class="mdl-card__actions">
+                <button type="button" name="button" class="mdl-button"> <a href="https://snazzymaps.com" target="_blank">https://snazzymaps.com</a></button>
               </div>
               <div class="mdl-card__actions hidden">
                 <button class="mdl-button">Copiar Código</button>
@@ -298,26 +570,7 @@
         center: uluru
       });
 
-      var contentString3 = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-          '<div id="bodyContent">'+
-          '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-          'sandstone rock formation in the southern part of the '+
-          'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-          'south west of the nearest large town, Alice Springs; 450&#160;km '+
-          '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-          'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-          'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-          'Aboriginal people of the area. It has many springs, waterholes, '+
-          'rock caves and ancient paintings. Uluru is listed as a World '+
-          'Heritage Site.</p>'+
-          '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-          'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-          '(last visited June 22, 2009).</p>'+
-          '</div>'+
-          '</div>';
+      var contentString3 = 'contenido';
 
       var infowindow3 = new google.maps.InfoWindow({
         content: contentString3
@@ -331,8 +584,187 @@
       marker3.addListener('click', function() {
         infowindow3.open(map3, marker3);
       });
-    }
 
+      //multiples marcadores
+
+        var locations4 = [
+       ['Bondi Beach', -33.890542, 151.274856, 4],
+       ['Coogee Beach', -33.923036, 151.259052, 5],
+       ['Cronulla Beach', -34.028249, 151.157507, 3],
+       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+       ['Maroubra Beach', -33.950198, 151.259302, 1]
+     ];
+     var origin4 = new google.maps.LatLng(locations4[0][1], locations4[0][2]);
+
+     var map4 = new google.maps.Map(document.getElementById('map_multiple'), {
+       zoom: 10,
+       center: origin4,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     });
+
+     var infowindow4 = new google.maps.InfoWindow();
+
+     var marker4, i;
+
+     for (i = 0; i < locations4.length; i++) {
+       var position4 = new google.maps.LatLng(locations4[i][1], locations4[i][2]);
+
+       marker4 = new google.maps.Marker({
+         position: position4,
+         map: map4
+       });
+
+       google.maps.event.addListener(marker4, 'click', (function(marker4, i) {
+         return function() {
+           infowindow4.setContent(locations4[i][0]);
+           infowindow4.open(map4, marker4);
+         }
+       })(marker4, i));
+     }
+
+     // Multiples marcadores con bound
+
+     var locations5 = [
+       ['X', -36.890542, 153.274856, 6],
+      ['Bondi Beach', -33.890542, 151.274856, 4],
+      ['Coogee Beach', -33.923036, 151.259052, 5],
+      ['Cronulla Beach', -34.028249, 151.157507, 3],
+      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+      ['Maroubra Beach', -33.950198, 151.259302, 1]
+    ];
+    var origin5 = new google.maps.LatLng(locations5[0][1], locations5[0][2]);
+
+      var map5 = new google.maps.Map(document.getElementById('map_bounds'), {
+        zoom: 5,
+        center: origin5,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      var latlngbounds5 = new google.maps.LatLngBounds();
+
+      var infowindow5 = new google.maps.InfoWindow();
+
+      var marker5, i;
+
+      for (i = 0; i < locations5.length; i++) {
+        var position5 = new google.maps.LatLng(locations5[i][1], locations5[i][2]);
+        marker5 = new google.maps.Marker({
+          position: position5,
+          map: map5,
+
+        });
+
+        latlngbounds5.extend(position5);
+
+
+        google.maps.event.addListener(marker5, 'click', (function(marker5, i) {
+          return function() {
+            infowindow5.setContent(locations5[i][0]);
+            infowindow5.open(map5, marker5);
+          }
+        })(marker5, i));
+      }
+
+      map5.fitBounds(latlngbounds5);
+
+       // Multiples marcadores con bound y colores
+
+      var locations6 = [
+        ['X', -30.890542, 156.274856, 6],
+       ['Bondi Beach', -33.890542, 151.274856, 4],
+       ['Coogee Beach', -33.923036, 151.259052, 5],
+       ['Cronulla Beach', -34.028249, 151.157507, 3],
+       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+       ['Maroubra Beach', -33.950198, 151.259302, 1]
+     ];
+     var origin6 = new google.maps.LatLng(locations6[0][1], locations6[0][2]);
+     var styles6 = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
+
+       var map6 = new google.maps.Map(document.getElementById('map_colores'), {
+         zoom: 5,
+         center: origin6,
+         mapTypeId: google.maps.MapTypeId.ROADMAP,
+         styles: styles6
+
+       });
+
+       var latlngbounds6 = new google.maps.LatLngBounds();
+
+       var infowindow6 = new google.maps.InfoWindow();
+
+       var marker6, i;
+
+       for (i = 0; i < locations6.length; i++) {
+         var position6 = new google.maps.LatLng(locations6[i][1], locations6[i][2]);
+         marker6 = new google.maps.Marker({
+           position: position6,
+           map: map6,
+
+         });
+
+         latlngbounds6.extend(position6);
+
+
+         google.maps.event.addListener(marker6, 'click', (function(marker6, i) {
+           return function() {
+             infowindow6.setContent(locations6[i][0]);
+             infowindow6.open(map6, marker6);
+           }
+         })(marker6, i));
+       }
+
+       map6.fitBounds(latlngbounds6);
+
+       // Multiples marcadores con bound y colores con custom icons
+
+       var locations7 = [
+        ['Bondi Beach', -33.890542, 151.274856, 4],
+        ['Coogee Beach', -33.923036, 151.259052, 5],
+        ['Cronulla Beach', -34.028249, 151.157507, 3],
+        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+        ['Maroubra Beach', -33.950198, 151.259302, 1]
+      ];
+      var origin7 = new google.maps.LatLng(locations7[0][1], locations7[0][2]);
+      var styles7 = [{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#002a50"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#002a50"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#0086ff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#d9d9d9"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#363636"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#acacac"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"on"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#f60404"},{"visibility":"off"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#002a50"}]}];
+      var image = {
+        url: 'images/pin.svg'
+          };
+        var map7 = new google.maps.Map(document.getElementById('map_iconos'), {
+          zoom: 5,
+          center: origin7,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          styles: styles7
+        });
+
+        var latlngbounds7 = new google.maps.LatLngBounds();
+
+        var infowindow7 = new google.maps.InfoWindow();
+
+        var marker7, i;
+
+        for (i = 0; i < locations7.length; i++) {
+          var position7 = new google.maps.LatLng(locations7[i][1], locations7[i][2]);
+          marker7 = new google.maps.Marker({
+            position: position7,
+            map: map7,
+            icon: image
+          });
+
+          latlngbounds7.extend(position7);
+
+
+          google.maps.event.addListener(marker7, 'click', (function(marker7, i) {
+            return function() {
+              infowindow7.setContent(locations7[i][0]);
+              infowindow7.open(map7, marker7);
+            }
+          })(marker7, i));
+        }
+
+        map7.fitBounds(latlngbounds7);
+
+       //end
+    }
     </script>
 
 
