@@ -533,51 +533,14 @@
                   <pre>
                     &lt;script type="text/javascript"&gt;
 
-                    var locations7 = [
-                     ['Bondi Beach', -33.890542, 151.274856, 4],
-                     ['Coogee Beach', -33.923036, 151.259052, 5],
-                     ['Cronulla Beach', -34.028249, 151.157507, 3],
-                     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-                     ['Maroubra Beach', -33.950198, 151.259302, 1]
-                   ];
-                   var origin7 = new google.maps.LatLng(locations7[0][1], locations7[0][2]);
-                   var styles7 = [{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#002a50"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#002a50"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#0086ff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#d9d9d9"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#363636"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#acacac"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"on"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#707070"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#f60404"},{"visibility":"off"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#002a50"}]}];
-                   var image = {
-                     url: 'images/pin.svg'
-                       };
-                     var map7 = new google.maps.Map(document.getElementById('map_iconos'), {
-                       zoom: 5,
-                       center: origin7,
-                       mapTypeId: google.maps.MapTypeId.ROADMAP,
-                       styles: styles7
-                     });
+                    panorama = new google.maps.StreetViewPanorama(
+                        document.getElementById('map_streetview'),
+                        {
+                          position: {lat: 37.869260, lng: -122.254811},
+                          pov: {heading: 165, pitch: 0},
+                          zoom: 1
+                        });
 
-                     var latlngbounds7 = new google.maps.LatLngBounds();
-
-                     var infowindow7 = new google.maps.InfoWindow();
-
-                     var marker7, i;
-
-                     for (i = 0; i < locations7.length; i++) {
-                       var position7 = new google.maps.LatLng(locations7[i][1], locations7[i][2]);
-                       marker7 = new google.maps.Marker({
-                         position: position7,
-                         map: map7,
-                         icon: image
-                       });
-
-                       latlngbounds7.extend(position7);
-
-
-                       google.maps.event.addListener(marker7, 'click', (function(marker7, i) {
-                         return function() {
-                           infowindow7.setContent(locations7[i][0]);
-                           infowindow7.open(map7, marker7);
-                         }
-                       })(marker7, i));
-                     }
-
-                     map7.fitBounds(latlngbounds7);
 
                     &lt;/script&gt;
 
@@ -589,12 +552,12 @@
               </div>
               <div class="mdl-border-top">
                 <pre>
-                  var customImage = {
-                    url: 'images/pin.svg'
-                      };
-
-                      new google.maps.Marker({
-                        icon: customImage
+                  panorama = new google.maps.StreetViewPanorama(
+                      document.getElementById('map_streetview'),
+                      {
+                        position: {lat: 37.869260, lng: -122.254811},
+                        pov: {heading: 165, pitch: 0},
+                        zoom: 1
                       });
                 </pre>
               </div>
@@ -843,8 +806,17 @@
 
         map7.fitBounds(latlngbounds7);
 
-       //end
+       // Google StreetViewPanorama
+
+       panorama = new google.maps.StreetViewPanorama(
+           document.getElementById('map_streetview'),
+           {
+             position: {lat: 37.869260, lng: -122.254811},
+             pov: {heading: 165, pitch: 0},
+             zoom: 1
+           });
     }
+
     </script>
 
 
